@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant ChatBot</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-box" id="chatBox">
+      <% messages.forEach(message => { %>
+        <% if (message.type === 'welcome') { %>
+          <div class="message bot-message">
+            <p>Welcome to our Restaurant ChatBot! Please select an option:</p>
+            <ul class="option-list">
+              <% message.content.forEach(option => { %>
+                <li><%= option.id %> - <%= option.text %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } else if (message.type === 'menu') { %>
+          <div class="message bot-message">
+            <p>Please select an item:</p>
+            <ul class="menu-list">
+              <% message.content.forEach(item => { %>
+                <li><%= item.id %> - <%= item.name %> (N<%= item.price %>)</li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } else { %>
+          <div class="message bot-message"><%- message.content %></div>
+        <% } %>
+      <% }) %>
+    </div>
+    <form action="/chatbot" method="POST" class="chat-form">
+      <input type="text" name="message" id="userInput" placeholder="Enter option..." required>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</body>
+</html>
