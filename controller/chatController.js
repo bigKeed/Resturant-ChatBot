@@ -180,7 +180,7 @@ exports.handleMessage = async (req, res) => {
         });
         messages.push({
           type: "text",
-          content: `${selectedItem.name} added to order. Total: N${order.total}`,
+          content: `${selectedItem.name} added to order. Total: N${order.total}, send 99 to checkout or 1 to place new order.`,
         });
         messages.push({ type: "welcome", content: welcomeOptions });
       } else {
